@@ -1,0 +1,32 @@
+<section>
+  <p>read works!</p>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>model</th>
+        <th>user_id</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td>{{ car.id }}</td>
+        <td>
+          {{ car.model }}
+        </td>
+        <td>
+          {{ car.user_id }}
+        </td>
+        <td>
+          <button class="delete" (click)="deleteCar(car.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 *ngFor="let response of responses">{{ response }}</h3>
+
+  <a routerLink="/add">Add Car</a>
+  <br />
+  <a routerLink="/update">modify Car</a>
+</section>

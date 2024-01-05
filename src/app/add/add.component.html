@@ -1,0 +1,14 @@
+<section>
+  <p>add works!</p>
+  <div>
+    <input type="text" [(ngModel)]="model" name="model" placeholder="model" />
+    <input
+      type="text"
+      [(ngModel)]="user_id"
+      name="user_id"
+      placeholder="user_id"
+    />
+    <button (click)="submit()">Send</button>
+  </div>
+  <h3 *ngFor="let response of responses">{{ response }}</h3>
+</section>
