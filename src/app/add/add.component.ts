@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CarService } from '../services/car/car.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add',
@@ -14,7 +15,7 @@ export class AddComponent
 
   responses: string[] = [];
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private router: Router) { }
 
   submit()
   {
@@ -22,7 +23,11 @@ export class AddComponent
     this.carService.addData({ id: '', model: this.model, user_id: this.user_id }).subscribe((data) =>
     {
       console.log(data);
-      this.responses.push(data.message + " : " + this.model + " " + this.user_id);
+      if (data.error) {
+        alert(data.error);
+        return;
+      }
+      this.router.navigate(['/read']);
     }
     );
 

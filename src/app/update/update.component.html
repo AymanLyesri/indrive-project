@@ -1,15 +1,33 @@
-<section>
-  <p>update works!</p>
-  <div>
-    <input type="text" [(ngModel)]="id" name="id" placeholder="id" />
-    <input type="text" [(ngModel)]="model" name="model" placeholder="model" />
+<section class="h-full flex flex-col justify-center items-center">
+  <div class="m-5">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Model</label
+    >
     <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="text"
+      [(ngModel)]="model"
+      name="model"
+      placeholder="model"
+      required
+    />
+  </div>
+  <div class="m-5">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >User Id</label
+    >
+    <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       type="text"
       [(ngModel)]="user_id"
       name="user_id"
       placeholder="user_id"
+      required
     />
-    <button (click)="submit()">Send</button>
   </div>
-  <h3 *ngFor="let response of responses">{{ response }}</h3>
+  <button (click)="submit()">update</button>
 </section>

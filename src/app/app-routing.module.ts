@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReadComponent } from './read/read.component';
 import { AddComponent } from './add/add.component';
 import { UpdateComponent } from './update/update.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
-const routes: Routes = [{ path: '', redirectTo: '/read', pathMatch: 'full' },
-{ path: 'read', component: ReadComponent },
+const routes: Routes = [{ path: '', redirectTo: '/auth', pathMatch: 'full' },
+{ path: 'auth', component: AuthenticationComponent },
+{ path: 'read/:table', component: ReadComponent },
 { path: 'add', component: AddComponent },
-{ path: 'update', component: UpdateComponent }
+{ path: 'update/:id', component: UpdateComponent }
 ];
 
 @NgModule({
