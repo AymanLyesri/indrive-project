@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/security/authentication.service';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -32,8 +33,13 @@ export class AppComponent implements OnInit
 
   logout()
   {
+
     this.auth.setLogged(false);
     localStorage.removeItem('id');
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(() =>
+    {
+      alert("You have been logged out");
+    })
+
   }
 }

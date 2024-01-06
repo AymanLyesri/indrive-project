@@ -63,7 +63,7 @@ export class ReadComponent
       }
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       {
-        this.router.navigate(['/read']);
+        this.router.navigate(['/read/' + this.table]);
       });
     }
 
@@ -80,7 +80,7 @@ export class ReadComponent
       }
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       {
-        this.router.navigate(['/read']);
+        this.router.navigate(['/read/' + this.table]);
       });
     }
 
@@ -97,7 +97,7 @@ export class ReadComponent
       }
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       {
-        this.router.navigate(['/read']);
+        this.router.navigate(['/read/' + this.table]);
       });
     }
 
