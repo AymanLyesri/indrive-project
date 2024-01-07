@@ -26,7 +26,10 @@ export class AuthenticationComponent
         return;
       }
       localStorage.setItem('id', data[0].toString());
+      localStorage.setItem('admin', data[2].toString());
       this.authService.setLogged(true);
+
+
       this.router.navigate(['/read/all']);
 
     }

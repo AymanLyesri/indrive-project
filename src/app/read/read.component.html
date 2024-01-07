@@ -1,90 +1,7 @@
-<section *ngIf="table == 'cars' || table == 'all'" class="px-60 py-20">
-  <h3>Cars</h3>
-
-  <table
-    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-  >
-    <thead
-      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-    >
-      <tr>
-        <th class="px-6 py-3">id</th>
-        <th class="px-6 py-3">model</th>
-        <th class="px-6 py-3">user_id</th>
-        <th class="px-6 py-3">add</th>
-        <th class="px-6 py-3">update</th>
-        <th class="px-6 py-3">delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-        *ngFor="let car of cars"
-      >
-        <td class="px-6 py-3">{{ car.id }}</td>
-        <td class="px-6 py-3">
-          {{ car.model }}
-        </td>
-        <td class="px-6 py-3">
-          {{ car.user_id }}
-        </td>
-        <td class="px-6 py-3"></td>
-
-        <td class="px-6 py-3">
-          <button
-            class="bg-blue-500 rounded p-2 text-white"
-            [routerLink]="'/update/' + car.id"
-          >
-            Update
-          </button>
-        </td>
-        <td class="px-6 py-3">
-          <button
-            class="bg-red-500 rounded p-2 text-white"
-            (click)="deleteCar(car.id)"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-      <tr
-        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-      >
-        <td class="px-6 py-3"></td>
-        <td class="px-6 py-3">
-          <input
-            #model
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
-            name="model"
-            placeholder="model"
-          />
-        </td>
-        <td class="px-6 py-3">
-          <input
-            #user_id
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text"
-            name="user_id"
-            placeholder="user_id"
-          />
-        </td>
-        <td class="px-6 py-3">
-          <button
-            class="bg-green-500 rounded p-2 text-white"
-            (click)="addCar(model.value, user_id.value)"
-          >
-            Add
-          </button>
-        </td>
-        <td class="px-6 py-3"></td>
-        <td class="px-6 py-3"></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<section *ngIf="table == 'users' || table == 'all'" class="px-60 py-20">
+<section
+  *ngIf="(table == 'users' || table == 'all') && isAdmin"
+  class="px-60 py-20"
+>
   <h3>Users</h3>
 
   <table
@@ -122,7 +39,7 @@
         <td class="px-6 py-3">
           <button
             class="bg-blue-500 rounded p-2 text-white"
-            [routerLink]="'/update/' + user.id"
+            [routerLink]="'/update/users/' + user.id"
           >
             Update
           </button>
@@ -182,6 +99,92 @@
   </table>
 </section>
 
+<section *ngIf="table == 'cars' || table == 'all'" class="px-60 py-20">
+  <h3>Cars</h3>
+
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th class="px-6 py-3">id</th>
+        <th class="px-6 py-3">model</th>
+        <th class="px-6 py-3">user_id</th>
+        <th class="px-6 py-3">add</th>
+        <th class="px-6 py-3">update</th>
+        <th class="px-6 py-3">delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+        *ngFor="let car of filteredCars"
+      >
+        <td class="px-6 py-3">{{ car.id }}</td>
+        <td class="px-6 py-3">
+          {{ car.model }}
+        </td>
+        <td class="px-6 py-3">
+          {{ car.user_id }}
+        </td>
+        <td class="px-6 py-3"></td>
+
+        <td class="px-6 py-3">
+          <button
+            class="bg-blue-500 rounded p-2 text-white"
+            [routerLink]="'/update/cars/' + car.id"
+          >
+            Update
+          </button>
+        </td>
+        <td class="px-6 py-3">
+          <button
+            class="bg-red-500 rounded p-2 text-white"
+            (click)="deleteCar(car.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      >
+        <td class="px-6 py-3"></td>
+        <td class="px-6 py-3">
+          <input
+            #model
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            name="model"
+            placeholder="model"
+          />
+        </td>
+        <td class="px-6 py-3">
+          <input
+            #user_id
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text"
+            name="user_id"
+            placeholder="user_id"
+          />
+        </td>
+        <td class="px-6 py-3">
+          <button
+            class="bg-green-500 rounded p-2 text-white"
+            (click)="addCar(model.value, user_id.value)"
+          >
+            Add
+          </button>
+        </td>
+        <td class="px-6 py-3"></td>
+        <td class="px-6 py-3"></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
 <section *ngIf="table == 'trajectories' || table == 'all'" class="px-60 py-20">
   <h3>Trajectories</h3>
 
@@ -204,7 +207,7 @@
     <tbody>
       <tr
         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-        *ngFor="let trajectory of trajectories"
+        *ngFor="let trajectory of filteredTrajectories"
       >
         <td class="px-6 py-3">{{ trajectory.id }}</td>
         <td class="px-6 py-3">
@@ -220,7 +223,7 @@
         <td class="px-6 py-3">
           <button
             class="bg-blue-500 rounded p-2 text-white"
-            [routerLink]="'/update/' + trajectory.id"
+            [routerLink]="'/update/trajectories/' + trajectory.id"
           >
             Update
           </button>

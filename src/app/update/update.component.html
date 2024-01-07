@@ -1,4 +1,59 @@
-<section class="h-full flex flex-col justify-center items-center">
+<section
+  *ngIf="table == 'users'"
+  class="h-full flex flex-col justify-center items-center"
+>
+  <div class="m-5">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Login</label
+    >
+    <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="text"
+      [(ngModel)]="login"
+      name="login"
+      placeholder="login"
+      required
+    />
+  </div>
+  <div class="m-5">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Password</label
+    >
+    <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="text"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="password"
+      required
+    />
+  </div>
+  <div class="m-5">
+    <label
+      for="admin"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Admin</label
+    >
+    <input
+      #admin
+      class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-700 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+      type="checkbox"
+      name="admin"
+      placeholder="admin"
+    />
+  </div>
+
+  <button (click)="updateUser()">update</button>
+</section>
+
+<section
+  *ngIf="table == 'cars'"
+  class="h-full flex flex-col justify-center items-center"
+>
   <div class="m-5">
     <label
       for="first_name"
@@ -29,5 +84,58 @@
       required
     />
   </div>
-  <button (click)="submit()">update</button>
+  <button (click)="updateCar()">update</button>
+</section>
+
+<section
+  *ngIf="table == 'trajectories'"
+  class="h-full flex flex-col justify-center items-center"
+>
+  <div class="m-5">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >From</label
+    >
+    <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="text"
+      [(ngModel)]="from_place"
+      name="from_place"
+      placeholder="from_place"
+      required
+    />
+  </div>
+  <div class="m-5">
+    <label
+      for="first_name"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >To</label
+    >
+    <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="text"
+      [(ngModel)]="to_place"
+      name="to_place"
+      placeholder="to_place"
+      required
+    />
+  </div>
+  <div class="m-5">
+    <label
+      for="admin"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >car_id</label
+    >
+    <input
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      type="text"
+      [(ngModel)]="car_id"
+      name="car_id"
+      placeholder="car_id"
+      required
+    />
+  </div>
+
+  <button (click)="updateTrajectory()">update</button>
 </section>

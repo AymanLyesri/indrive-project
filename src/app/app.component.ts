@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/security/authentication.service';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,30 +11,30 @@ export class AppComponent implements OnInit
 {
   title = 'indrive-frontend';
   loggedIn: boolean = false;
+  isAdmin: boolean = false;
 
 
   constructor(private router: Router, private auth: AuthenticationService)
   {
     this.loggedIn = localStorage.getItem('id') == null ? false : true;
-    console.log(this.loggedIn);
+    this.isAdmin = localStorage.getItem('admin') === 'true';
   }
 
   ngOnInit(): void
   {
     this.auth.isLogged().subscribe((logged) =>
     {
-      this.loggedIn = logged;
+      this.loggedIn = localStorage.getItem('id') == null ? false : true;
+      this.isAdmin = localStorage.getItem('admin') === 'true';
+      console.log(this.loggedIn + " " + this.isAdmin);
     }
     );
-
-
   }
 
   logout()
   {
-
+    localStorage.clear();
     this.auth.setLogged(false);
-    localStorage.removeItem('id');
     this.router.navigate(['/']).then(() =>
     {
       alert("You have been logged out");

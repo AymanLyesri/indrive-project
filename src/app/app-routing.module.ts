@@ -9,7 +9,7 @@ const routes: Routes = [{ path: '', redirectTo: '/auth', pathMatch: 'full' },
 { path: 'auth', component: AuthenticationComponent },
 { path: 'read/:table', component: ReadComponent },
 { path: 'add', component: AddComponent },
-{ path: 'update/:id', component: UpdateComponent }
+{ path: 'update/:table/:id', component: UpdateComponent }
 ];
 
 @NgModule({

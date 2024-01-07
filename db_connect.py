@@ -131,7 +131,7 @@ def update_data(table,data_id):
                 update_query = "UPDATE cars SET model = %s, user_id = %s WHERE id = %s"
                 cursor.execute(update_query, ( data.get('model'), data.get('user_id'), data_id))
             elif table == 'users':
-                update_query = "UPDATE user SET login = %s, password = %s, admin = %s WHERE id = %s"
+                update_query = "UPDATE users SET login = %s, password = %s, admin = %s WHERE id = %s"
                 cursor.execute(update_query, ( data.get('login'), data.get('password'), data.get('admin'), data_id))
             elif table == 'trajectories':
                 update_query = "UPDATE trajectories SET from_place = %s, to_place = %s, car_id = %s WHERE id = %s"
@@ -220,10 +220,12 @@ def authentication():
                # Check if the login and password exist in the 'data' list
                 user_found = False
                 is_admin = False
+                user_id = 0
                 for user in data:
                     print(login,password)
                     if user['login'] == login and user['password'] == password:
                         user_found = True
+                        user_id = user['id']
                         is_admin = bool(user['admin'])
                         break
 
@@ -236,7 +238,7 @@ def authentication():
                     print("Login or password incorrect.")
 
 
-                return jsonify([user_found, is_admin])
+                return jsonify([user_id,user_found, is_admin])
 
     except mysql.connector.Error as error:
         print("Error while connecting to MySQL:", error)

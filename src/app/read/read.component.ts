@@ -18,11 +18,21 @@ export class ReadComponent
   public table: string = "";
 
   public cars: Car[] = [];
+  public filteredCars: Car[] = [];
+
   public users: User[] = [];
+  public filteredUsers: User[] = [];
+
   public trajectories: Trajectory[] = [];
+  public filteredTrajectories: Trajectory[] = [];
+
+  isAdmin: boolean = false;
 
   constructor(private carService: CarService,
-    private route: ActivatedRoute, private userService: UserService, private trajectoryService: TrajectoryService, private router: Router) { }
+    private route: ActivatedRoute, private userService: UserService, private trajectoryService: TrajectoryService, private router: Router)
+  {
+    this.isAdmin = localStorage.getItem('admin') === 'true';
+  }
 
   ngOnInit(): void
   {
@@ -33,8 +43,17 @@ export class ReadComponent
 
     this.carService.getData().subscribe((cars: Car[]) =>
     {
-      this.cars = cars;
-      console.log(cars);
+      if (this.isAdmin) {
+        this.filteredCars = cars;
+        console.log(cars);
+        return;
+      }
+      let userId = localStorage.getItem('id');
+
+      this.filteredCars = cars.filter(car =>
+      {
+        return car.user_id == userId;
+      });
     }
     );
     this.userService.getData().subscribe((users: User[]) =>
@@ -45,10 +64,20 @@ export class ReadComponent
     );
     this.trajectoryService.getData().subscribe((trajectories: Trajectory[]) =>
     {
-      this.trajectories = trajectories;
-      console.log(trajectories);
-    }
-    );
+      if (this.isAdmin) {
+        this.filteredTrajectories = trajectories;
+        console.log(trajectories);
+        return;
+      }
+      let userId = localStorage.getItem('id');
+
+      this.filteredTrajectories = trajectories.filter(trajectory =>
+      {
+        let gg = this.filteredCars.some(car => car.id === trajectory.car_id);
+        return gg;
+      });
+    });
+
   }
 
   addCar(model: string, user_id: string)
